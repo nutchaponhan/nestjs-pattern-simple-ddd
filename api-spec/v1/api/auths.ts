@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { c } from "../libs/contract";
+import { c } from "../../libs/contract";
 
 const tokenSchema = z.object({
   token: z.string(),

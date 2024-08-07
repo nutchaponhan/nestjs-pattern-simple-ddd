@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { c, SECURITY_METADATA } from "../libs/contract";
+import { c, SECURITY_METADATA } from "../../libs/contract";
 
 export const usersContract = c.router(
   {

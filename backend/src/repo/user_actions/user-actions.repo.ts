@@ -25,7 +25,7 @@ export class UsersActionsRepo extends RepoBase<
         createdAt: userAction.createdAt,
         props: {
           action: userAction.action,
-          userId: userAction.id || null,
+          userId: userAction.userId || null,
         },
       }),
     );

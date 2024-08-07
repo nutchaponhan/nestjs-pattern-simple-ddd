@@ -7,6 +7,7 @@ import { Err, Ok } from 'oxide.ts';
 import { UserNotFoundError } from '@app/users/users.error';
 import { UsersHttpController } from '@app/users/controller/http/users.http.controller';
 import { faker } from '@faker-js/faker';
+import { C } from 'api-spec';
 
 const mockDateStr = {
   createdAt: faker.date.anytime().toISOString(),
@@ -15,6 +16,10 @@ const mockDateStr = {
 };
 const mockUser = UsersFactory.build(mockDateStr);
 const mockUsers = UsersFactory.buildList(2, mockDateStr);
+
+const getPath = C.users.get.path;
+const getIdPath = C.users.getId.path;
+const getIdPathSet = (id: number) => getIdPath.replace(':id', id.toString());
 
 const mockUsersUsecase = {
   findAll: jest.fn(),
@@ -44,12 +49,12 @@ describe('UsersHttpController', () => {
     await app.close();
   });
 
-  describe('GET /users', () => {
+  describe(`GET ${getPath}`, () => {
     it('should return an array of users', async () => {
       usecase.findAll.mockResolvedValue(Ok(mockUsers));
 
       return request(app.getHttpServer())
-        .get('/users')
+        .get(getPath)
         .expect(200)
         .expect(({ body }) => {
           expect(usecase.findAll).toHaveBeenCalled();
@@ -60,12 +65,12 @@ describe('UsersHttpController', () => {
     });
   });
 
-  describe('GET /users/:id', () => {
+  describe(`GET ${getIdPath}`, () => {
     it('should return a single user', async () => {
       usecase.findOne.mockResolvedValue(Ok(mockUser));
 
       return request(app.getHttpServer())
-        .get('/users/1')
+        .get(getIdPathSet(1))
         .expect(200)
         .expect(({ body }) => {
           expect(usecase.findOne).toHaveBeenCalledWith(1);
@@ -78,7 +83,7 @@ describe('UsersHttpController', () => {
       usecase.findOne.mockResolvedValue(Err(new UserNotFoundError()));
 
       return request(app.getHttpServer())
-        .get('/users/1')
+        .get(getIdPathSet(1))
         .expect(400)
         .expect(({ body }) => {
           expect(body.code).toBe('400');

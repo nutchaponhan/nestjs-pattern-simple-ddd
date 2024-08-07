@@ -24,50 +24,36 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Drizzle domain driven pattern with global transaction.
 
 ## Installation
 
 ```bash
-$ yarn install
+$ yarn
 ```
 
 ## Running the app
 
+Recommend opening 2 terminal, 1 for backend and 1 for api-spec
+
 ```bash
 # development
-$ yarn run start
+$ make dev
 
-# watch mode
-$ yarn run start:dev
-
-# production mode
-$ yarn run start:prod
+# api spec development
+$ make dev-spec
 ```
+
+## Api Documentation
+
+[Swagger UI](http://localhost:3000/api/documentation#/)
 
 ## Test
 
 ```bash
 # unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
+$ make test
 
 # test coverage
-$ yarn run test:cov
+$ make test-cov
 ```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).

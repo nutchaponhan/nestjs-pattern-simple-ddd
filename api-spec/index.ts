@@ -1,13 +1,4 @@
-import { z } from "zod";
 import { c } from "./libs/contract";
-import { usersContract } from "./v1/users";
-import { authsContract } from "./v1/auths";
+import { v1Contract } from "./v1";
 
-export const C = c.router(
-  { users: usersContract, auths: authsContract },
-  {
-    commonResponses: {
-      400: z.object({ code: z.string(), message: z.string() }),
-    },
-  }
-);
+export const C = c.router(v1Contract, { pathPrefix: "/api" });

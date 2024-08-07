@@ -2,8 +2,7 @@
   "private": true,
   "workspaces": [
     "api-spec",
-    "backend",
-    "frontend"
+    "backend"
   ],
   "scripts": {
     "build": "yarn workspaces run build"
