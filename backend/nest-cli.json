@@ -7,7 +7,7 @@
     "assets": [
       {
         "include": "drizzle/migrations/**/*",
-        "outDir": "dist/src"
+        "outDir": "dist"
       }
     ],
     "plugins": []

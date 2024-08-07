@@ -32,6 +32,12 @@ Drizzle domain driven pattern with global transaction.
 $ yarn
 ```
 
+## Setup .env
+
+```bash
+$ cp ./backend/.env.example ./backend/.env
+```
+
 ## Running the app
 
 Recommend opening 2 terminal, 1 for backend and 1 for api-spec
