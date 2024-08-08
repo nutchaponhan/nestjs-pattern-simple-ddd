@@ -24,7 +24,7 @@
 
 ## Description
 
-Drizzle domain driven pattern with global transaction.
+Drizzle domain driven pattern with global transaction, using [ts-rest](https://ts-rest.com/) (api-spec can also be used with react query on FE).
 
 ## Installation
 
