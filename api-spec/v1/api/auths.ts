@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { c } from "../../libs/contract";
+import { z } from 'zod';
+import { c } from '../../libs/contract';
 
 const tokenSchema = z.object({
   token: z.string(),
@@ -8,8 +8,8 @@ const tokenSchema = z.object({
 
 export const authsContract = c.router({
   signIn: {
-    method: "POST",
-    path: "/auths/sign-in",
+    method: 'POST',
+    path: '/auths/sign-in',
     body: z.object({
       email: z.string().email(),
       password: z.string(),
@@ -19,8 +19,8 @@ export const authsContract = c.router({
     },
   },
   signUp: {
-    method: "POST",
-    path: "/auths/sign-up",
+    method: 'POST',
+    path: '/auths/sign-up',
     body: z.object({
       email: z.string().email(),
       firstName: z.string(),
