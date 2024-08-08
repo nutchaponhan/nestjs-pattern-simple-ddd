@@ -26,6 +26,8 @@
 
 Drizzle domain driven pattern with global transaction, using [ts-rest](https://ts-rest.com/) (api-spec can also be used with react query on FE).
 
+Inspiration from: [domain-driven-hexagonal](https://github.com/Sairyss/domain-driven-hexagon?tab=readme-ov-file#domain-driven-hexagon)
+
 ## Installation
 
 ```bash
