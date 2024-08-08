@@ -29,9 +29,21 @@ export abstract class RepoBase<
   abstract getInstance(id: number): Promise<Result<E, Error>>;
   abstract get _table(): T;
 
+  /**
+   * save Entity to database
+   *
+   * HAVE ID - it will perform update
+   *
+   * NO ID - it will perform insert, then assign id to the object
+   *
+   * NOTE: This function modify the object directly
+   *
+   * @param entity - Entity object for the repo
+   * @return Promise<Err<UnableToSaveError | EntityValidationError>>
+   */
   async save(
     entity: E,
-  ): Promise<Result<E, UnableToSaveError | EntityValidationError>> {
+  ): Promise<Err<UnableToSaveError | EntityValidationError>> {
     const table = this._table;
 
     const err = entity.validate();
@@ -59,7 +71,7 @@ export abstract class RepoBase<
       return Err(new UnableToSaveError(e.message));
     }
 
-    return Ok(entity);
+    return null;
   }
 
   protected async selectById(

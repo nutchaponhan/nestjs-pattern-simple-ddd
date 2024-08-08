@@ -24,14 +24,12 @@ export class AuthsUseCase {
   ): Promise<
     Result<AuthsTokenData, UnableToSaveError | EntityValidationError>
   > {
-    const newUser = UserEntity.create(body);
-    const res = await this.usersRepo.save(newUser);
+    const user = UserEntity.create(body);
+    const saveErr = await this.usersRepo.save(user);
 
-    if (res.isErr()) {
-      return res;
+    if (saveErr) {
+      return saveErr;
     }
-
-    const user = res.unwrap();
 
     return Ok({
       token: this.generateAccessToken(user.id),
@@ -60,7 +58,11 @@ export class AuthsUseCase {
     }
 
     user.signIn();
-    await this.usersRepo.save(user);
+
+    const saveErr = await this.usersRepo.save(user);
+    if (saveErr) {
+      return saveErr;
+    }
 
     return Ok({
       token: this.generateAccessToken(user.id),

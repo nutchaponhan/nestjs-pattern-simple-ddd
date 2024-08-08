@@ -115,13 +115,11 @@ describe('RepoBase', () => {
     });
 
     it('Should create Entity if no id', async () => {
-      const res = await service.save(
-        new TestsEntity({ props: { name: 'test' } }),
-      );
+      const data = new TestsEntity({ props: { name: 'test' } });
 
-      expect(res.isErr()).toEqual(false);
+      const res = await service.save(data);
 
-      const data = res.unwrap();
+      expect(res).toEqual(null);
       expect(data).toBeInstanceOf(TestsEntity);
       expect(data.id).toBeTruthy();
 
@@ -137,13 +135,12 @@ describe('RepoBase', () => {
 
     it('Should update Entity if have id', async () => {
       const [id] = await drizzle.insert(TESTS, { name: 'test' });
-      const res = await service.save(
-        new TestsEntity({ id, props: { name: 'updated' } }),
-      );
 
-      expect(res.isErr()).toEqual(false);
+      const data = new TestsEntity({ id, props: { name: 'updated' } });
+      const res = await service.save(data);
 
-      const data = res.unwrap();
+      expect(res).toEqual(null);
+
       expect(data).toBeInstanceOf(TestsEntity);
       expect(data.id).toBeTruthy();
       expect(data.getProps().name).toEqual('updated');

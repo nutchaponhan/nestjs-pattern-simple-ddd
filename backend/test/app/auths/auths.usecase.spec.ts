@@ -15,6 +15,7 @@ import {
   CreateUsersFactory,
   UsersFactory,
 } from '@test/core/factories/users.factory';
+import { MOCK_SAVE, MOCK_SAVE_ERR } from '@test/core/utils/mock';
 import { createMockTestingModule } from '@test/core/utils/test-modules';
 import { Err, Ok } from 'oxide.ts';
 
@@ -62,7 +63,7 @@ describe('AuthsUsecase', () => {
     });
 
     it('should return token', async () => {
-      repo.save.mockResolvedValue(Ok(user));
+      repo.save.mockImplementation(MOCK_SAVE);
       jwtService.sign.mockReturnValue('token');
 
       const res = await usecase.signUp(body);
@@ -79,7 +80,7 @@ describe('AuthsUsecase', () => {
     });
 
     it('should return error if cant save', async () => {
-      repo.save.mockResolvedValue(Err(new UnableToSaveError()));
+      repo.save.mockImplementation(MOCK_SAVE_ERR);
       jwtService.sign.mockReturnValue('token');
 
       const res = await usecase.signUp(body);
@@ -114,6 +115,7 @@ describe('AuthsUsecase', () => {
     it('should return token', async () => {
       user.changePassword(body.password);
       repo.getInstanceByEmail.mockResolvedValue(Ok(user));
+      repo.save.mockImplementation(MOCK_SAVE);
       jwtService.sign.mockReturnValue('token');
 
       const res = await usecase.signIn(body);
@@ -148,6 +150,17 @@ describe('AuthsUsecase', () => {
 
       expect(res.isErr()).toEqual(true);
       expect(res.unwrapErr()).toBeInstanceOf(InvalidCredentialsError);
+    });
+
+    it('should throw UnableToSaveError if cant save', async () => {
+      user.changePassword(body.password);
+      repo.getInstanceByEmail.mockResolvedValue(Ok(user));
+      repo.save.mockImplementation(MOCK_SAVE_ERR);
+
+      const res = await usecase.signIn(body);
+
+      expect(res.isErr()).toEqual(true);
+      expect(res.unwrapErr()).toBeInstanceOf(UnableToSaveError);
     });
   });
 });
