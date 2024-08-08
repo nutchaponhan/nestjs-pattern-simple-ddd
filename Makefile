@@ -5,10 +5,13 @@ BE_DOCKER = docker compose -f ./backend/docker-compose.yml
 .up:
 	${BE_DOCKER} up -d
 
+.build-spec:
+	${SPEC_YARN} build
+
 down:
 	${BE_DOCKER} down --remove-orphans
 
-dev: .up
+dev: .up .build-spec
 	${BE_YARN} dev
 
 dev-spec:
@@ -17,7 +20,7 @@ dev-spec:
 test: .up
 	${BE_YARN} test
 
-test-cov:
+test-cov: .up
 	${BE_YARN} test:cov
 
 shell:
