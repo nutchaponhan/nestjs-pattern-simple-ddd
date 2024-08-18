@@ -24,14 +24,7 @@ const interceptor: Array<Provider> = [
 
 @Module({
   imports: [
-    AuthsModule,
-    UserActionsModule,
-    RequestContextModule,
-    RepoModule,
-    ServiceModule,
-    EventEmitterModule.forRoot(),
-    UsersModule,
-    ConfigModule.forRoot({ isGlobal: true }),
+    // core-app configuration
     NestDrizzleModule.forRootAsync({
       useFactory: () => {
         return {
@@ -42,6 +35,16 @@ const interceptor: Array<Provider> = [
         };
       },
     }),
+    EventEmitterModule.forRoot(),
+    ConfigModule.forRoot({ isGlobal: true }),
+    RequestContextModule,
+
+    // app domain
+    UserActionsModule,
+    AuthsModule,
+    RepoModule,
+    ServiceModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService, ...interceptor],
