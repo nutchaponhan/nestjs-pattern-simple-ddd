@@ -3,7 +3,7 @@ import { Module } from '@nestjs/common';
 import { UserRepository } from '../../../app/user-management/ports/user.repositoy';
 
 // Non exported
-import { DrizzleService } from './dizzle.service';
+import { DrizzleService } from './drizzle.service';
 import { DrizzleUserRepository } from './repository/user.repository';
 
 @Module({
@@ -15,6 +15,6 @@ import { DrizzleUserRepository } from './repository/user.repository';
       useClass: DrizzleUserRepository,
     },
   ],
-  exports: [UserRepository],
+  exports: [DrizzleService, UserRepository],
 })
 export class DrizzleModule {}

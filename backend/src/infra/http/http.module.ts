@@ -1,26 +1,15 @@
 import { Module } from '@nestjs/common';
-import { CacheManagerModule } from '@app/infra/persistence/cache/cache.module';
-import { OrderController } from './order.controller';
-import { ProductController } from './product.controller';
-import { UserController } from './user.controller';
 
-import { CreateOrderUseCase } from '@app/application/ecommerce/use-case/create-order';
-import { CreateProductUseCase } from '@app/application/ecommerce/use-case/create-product';
-import { CreateUserUseCase } from '@app/application/ecommerce/use-case/create-user';
-import { GetOrderUseCase } from '@app/application/ecommerce/use-case/get-order';
-import { GetProductUseCase } from '@app/application/ecommerce/use-case/get-product';
-import { GetUserUseCase } from '@app/application/ecommerce/use-case/get-user';
-import { CheckoutUrlUseCase } from '@app/application/ecommerce/use-case/checkout-url';
-import { CheckoutController } from './checkout.controller';
-import { PaymentModule } from '../payment/payment.module';
-import { GetOrdersUseCase } from '@app/application/ecommerce/use-case/get-orders';
-import { CheckoutCompleteUseCase } from '@app/application/ecommerce/use-case/checkout-complete';
+import { UserController } from './user.controller';
 import { AppController } from './app.controller';
 
+import { UserSignUpUseCase } from '../../app/user-management/use-case/user-signup.usecase';
+import { UserSignInUseCase } from '../../app/user-management/use-case/user-signin.usecase';
+
 @Module({
-  imports: [PaymentModule, CacheManagerModule],
-  controllers: [AppController, ProductController, UserController, OrderController, CheckoutController],
-  providers: [CreateProductUseCase, GetProductUseCase, CreateUserUseCase, GetUserUseCase, GetOrderUseCase, GetOrdersUseCase, CreateOrderUseCase, CheckoutUrlUseCase, CheckoutCompleteUseCase],
+  imports: [],
+  controllers: [AppController, UserController],
+  providers: [UserSignUpUseCase, UserSignInUseCase],
   exports: [],
 })
-export class HttpModule { }
+export class HttpModule {}

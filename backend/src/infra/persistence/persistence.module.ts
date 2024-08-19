@@ -1,22 +1,23 @@
 import { DynamicModule, Module } from '@nestjs/common';
 
-import { DrizzleModule } from '../persistence/dizzle/dizzle.module';
+import { DrizzleModule } from './dizzle/drizzle.module';
 
 interface DatabaseOptions {
-  type: 'prisma' | 'mongoose';
+  type: 'drizzle';
   global?: boolean;
 }
 
 @Module({})
 export class PersistenceModule {
   static async register({
+    type = 'drizzle',
     global = false,
   }: DatabaseOptions): Promise<DynamicModule> {
     return {
       global,
       module: PersistenceModule,
-      imports: [DrizzleModule],
-      exports: [DrizzleModule],
+      imports: [type === 'drizzle' && DrizzleModule],
+      exports: [type === 'drizzle' && DrizzleModule],
     };
   }
 }
