@@ -20,8 +20,8 @@ export class UserController {
   }
 
   @Post('signin')
-  signIn(@Body() userSignInDto: UserSignInDto) {
-    const response = this.userSignInUseCase.execute(userSignInDto);
+  signIn(@Body() userSignUpDto: UserSignInDto) {
+    const response = this.userSignInUseCase.execute(userSignUpDto);
     return response;
   }
 }

@@ -4,7 +4,7 @@ import { eq } from 'drizzle-orm';
 import { DrizzleService } from '../drizzle.service';
 import { $User } from '../schema';
 
-import { UserRepository } from '../../../../app/user-management/ports/user.repositoy';
+import { UserRepository } from '../../../../app/user-management/ports/user.repository';
 import { User } from '../../../../domain/user-management/user';
 import { DrizzleUserMapper } from '../mapper/user.mapper';
 

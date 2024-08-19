@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 
-import { UserRepository } from '../../../app/user-management/ports/user.repositoy';
+import { UserRepository } from '../../../app/user-management/ports/user.repository';
 
 // Non exported
 import { DrizzleService } from './drizzle.service';

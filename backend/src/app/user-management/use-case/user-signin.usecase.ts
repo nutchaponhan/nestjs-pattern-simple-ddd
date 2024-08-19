@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import { UserRepository } from '../ports/user.repositoy';
+import { UserRepository } from '../ports/user.repository';
 
 interface UserSignInCommand {
   email: string;
@@ -13,7 +13,6 @@ export class UserSignInUseCase {
 
   async execute({ email, password }: UserSignInCommand): Promise<boolean> {
     const user = await this.userRepository.find({ email });
-
     return user.checkPassword(password);
   }
 }

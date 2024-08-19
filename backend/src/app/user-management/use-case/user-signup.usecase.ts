@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 import { User } from '../../../domain/user-management/user';
-import { UserRepository } from '../ports/user.repositoy';
+import { UserRepository } from '../ports/user.repository';
 
 interface CreateUserUseCaseCommand {
   email: string;
