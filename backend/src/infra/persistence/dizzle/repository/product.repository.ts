@@ -8,7 +8,7 @@ import { ProductRepository } from '../../../../app/product-in-house/ports/produc
 import { Product } from '../../../../domain/product-in-house/product';
 
 @Injectable()
-export class DrizzleOrderRepository implements ProductRepository {
+export class DrizzleProductRepository implements ProductRepository {
   constructor(private drizzle: DrizzleService) {}
 
   async findMany(): Promise<Product[]> {

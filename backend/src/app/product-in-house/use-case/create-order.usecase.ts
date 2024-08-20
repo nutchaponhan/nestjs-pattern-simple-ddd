@@ -27,9 +27,7 @@ export class CreateOrderUseCase {
       email: createOrderUseCaseCommand.email,
     });
 
-    const products = await this.productRepository.findMany({
-      id: createOrderUseCaseCommand.productId,
-    });
+    const products = await this.productRepository.findMany();
 
     const availableProduct = products.filter((p) => p.checkAvailable);
 

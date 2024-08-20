@@ -8,7 +8,7 @@ import { OrderProductRepository } from '../../../../app/product-in-house/ports/o
 import { OrderProduct } from '../../../../domain/product-in-house/order-product';
 
 @Injectable()
-export class DrizzleOrderRepository implements OrderProductRepository {
+export class DrizzleOrderProductRepository implements OrderProductRepository {
   constructor(private drizzle: DrizzleService) {}
 
   async create(orderProduct: OrderProduct[]): Promise<OrderProduct[]> {
