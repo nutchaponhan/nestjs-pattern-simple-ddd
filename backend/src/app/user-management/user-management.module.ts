@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 
-import { HttpModule } from '../../infra/http/http.module';
+import { UserManagementHttpModule } from '../../infra/http/user-management/user-management.http.module';
 
 @Module({
-  imports: [HttpModule],
+  imports: [UserManagementHttpModule],
   controllers: [],
   providers: [],
 })

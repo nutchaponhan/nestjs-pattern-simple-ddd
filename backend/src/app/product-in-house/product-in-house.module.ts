@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 
-import { HttpModule } from '../../infra/http/http.module';
+import { ProductInHouseHttpModule } from '../../infra/http/product-in-house/product-in-house.http.module';
 
 @Module({
-  imports: [HttpModule],
+  imports: [ProductInHouseHttpModule],
   controllers: [],
   providers: [],
 })

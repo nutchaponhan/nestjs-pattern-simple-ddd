@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
-import { UserManagementModule } from './app/user-management/user-management.module';
 import { PersistenceModule } from './infra/persistence/persistence.module';
+import { AppController } from './infra/http/app.controller';
+import { UserManagementModule } from './app/user-management/user-management.module';
+import { ProductInHouseModule } from './app/product-in-house/product-in-house.module';
 
 @Module({
   imports: [
@@ -14,8 +16,9 @@ import { PersistenceModule } from './infra/persistence/persistence.module';
 
     // app domain
     UserManagementModule,
+    ProductInHouseModule,
   ],
-  controllers: [],
+  controllers: [AppController],
   providers: [],
 })
 export class AppModule {}
