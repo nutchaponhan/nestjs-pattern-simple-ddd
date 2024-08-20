@@ -1,29 +1,22 @@
-import { $User } from '../schema/users.schema';
-import { User } from '../../../../domain/user-management/user';
+import { $Order } from '../schema/orders.schema';
+
+import { Order } from '../../../../domain/product-in-house/order';
 
 export class DrizzleOrderMapper {
-  static toDomain(entity: typeof $User.$inferSelect): User {
-    const model = new User({
+  static toDomain(entity: typeof $Order.$inferSelect): Order {
+    const model = new Order({
       id: entity.id,
-      email: entity.email,
-      firstName: entity.firstName,
-      lastName: entity.lastName,
-      password: entity.password,
-      createdAt: entity.createdAt,
-      updatedAt: entity.updatedAt,
-      lastSignInAt: entity.lastSignInAt,
+      status: entity.status,
+      userId: entity.userId,
     });
     return model;
   }
 
-  static toDrizzle(user: User): typeof $User.$inferInsert {
+  static toDrizzle(order: Order): typeof $Order.$inferInsert {
     return {
-      email: user.email,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      password: user.password,
-      updatedAt: new Date(),
-      lastSignInAt: user.lastSignInAt,
+      id: order.id,
+      status: order.status,
+      userId: order.userId,
     };
   }
 }

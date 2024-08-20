@@ -6,12 +6,11 @@ import {
   varchar,
 } from 'drizzle-orm/pg-core';
 
-import { $User } from './users.schema';
-
-export const $Order = pgTable('orders', {
+export const $Product = pgTable('products', {
   id: serial('id').primaryKey(),
-  status: varchar('status', { length: 256 }).notNull(),
-  userId: integer('user_id').references(() => $User.id),
+  title: varchar('title', { length: 256 }).notNull(),
+  price: integer('price').notNull(),
+  stock: integer('stock').notNull(),
   createdAt: timestamp('created_at', { withTimezone: true })
     .notNull()
     .defaultNow(),

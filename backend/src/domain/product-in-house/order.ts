@@ -4,7 +4,7 @@ import { OrderProduct } from './order-product';
 
 export interface OrderProps {
   id?: number;
-  status?: 'paid' | 'open' | 'canceled';
+  status?: string;
   userId: number;
   orderProduct?: OrderProduct[];
 }
@@ -18,7 +18,7 @@ export class Order extends Entity<OrderProps> {
     return this.props.id;
   }
 
-  get status(): 'paid' | 'open' | 'canceled' {
+  get status(): string {
     return this.props.status;
   }
 

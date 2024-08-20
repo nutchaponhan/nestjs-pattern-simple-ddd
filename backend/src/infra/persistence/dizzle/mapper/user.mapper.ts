@@ -18,6 +18,7 @@ export class DrizzleUserMapper {
 
   static toDrizzle(user: User): typeof $User.$inferInsert {
     return {
+      id: user.id,
       email: user.email,
       firstName: user.firstName,
       lastName: user.lastName,
