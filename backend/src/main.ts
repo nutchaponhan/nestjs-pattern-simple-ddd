@@ -2,7 +2,6 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule } from '@nestjs/swagger';
 import mainConfig from './main.config';
-import { DrizzleService } from '@drizzle/drizzle.service';
 import { generateOpenApi } from '@ts-rest/open-api';
 import { C } from 'api-spec';
 import { SecurityRequirementObject } from '@nestjs/swagger/dist/interfaces/open-api-spec.interface';
@@ -23,9 +22,6 @@ async function bootstrap() {
   });
 
   mainConfig(app);
-
-  // Run Migration
-  await app.get(DrizzleService).migrate();
 
   const openApiDoc = generateOpenApi(
     C,

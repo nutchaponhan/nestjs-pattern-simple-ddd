@@ -1,8 +1,9 @@
 import { get } from 'env-var';
 import { ClientConfig } from 'pg';
-import './dotenv';
 import * as path from 'path';
 import { JwtModuleOptions } from '@nestjs/jwt';
+
+import './dotenv';
 
 class AppConfig {
   public nodeEnv: string;

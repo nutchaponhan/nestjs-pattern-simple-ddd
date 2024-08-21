@@ -1,49 +1,24 @@
-import { Module, Provider } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import appConfig from './core/config/app-config';
-import { APP_INTERCEPTOR } from '@nestjs/core';
-import { ContextInterceptor } from './core/application/interceptor/context-interceptor';
-import { EventEmitterModule } from '@nestjs/event-emitter';
-import { RequestContextModule } from 'nestjs-request-context';
-import { ServiceModule } from './service/service.module';
-import { UsersModule } from './app/users/users.module';
-import { NestDrizzleModule } from './drizzle/drizzle.module';
-import { RepoModule } from './repo/repo.module';
-import * as schema from '@drizzle/schema';
-import { AuthsModule } from '@app/auths/auths.module';
-import { UserActionsModule } from '@app/user-actions/user-actions.module';
 
-const interceptor: Array<Provider> = [
-  {
-    provide: APP_INTERCEPTOR,
-    useClass: ContextInterceptor,
-  },
-];
+import { PersistenceModule } from './infra/persistence/persistence.module';
+import { AppController } from './infra/http/app.controller';
+import { UserManagementModule } from './app/user-management/user-management.module';
+import { ProductInHouseModule } from './app/product-in-house/product-in-house.module';
 
 @Module({
   imports: [
-    AuthsModule,
-    UserActionsModule,
-    RequestContextModule,
-    RepoModule,
-    ServiceModule,
-    EventEmitterModule.forRoot(),
-    UsersModule,
+    // configuration
     ConfigModule.forRoot({ isGlobal: true }),
-    NestDrizzleModule.forRootAsync({
-      useFactory: () => {
-        return {
-          driver: 'postgresql',
-          url: appConfig.dbConfigUrl,
-          options: { schema },
-          migrationOptions: { migrationsFolder: './migration' },
-        };
-      },
-    }),
+
+    // infra
+    PersistenceModule.register({ type: 'drizzle', global: true }),
+
+    // app domain
+    UserManagementModule,
+    ProductInHouseModule,
   ],
   controllers: [AppController],
-  providers: [AppService, ...interceptor],
+  providers: [],
 })
 export class AppModule {}
