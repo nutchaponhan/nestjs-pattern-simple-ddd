@@ -5,8 +5,10 @@ import {
   timestamp,
   varchar,
 } from 'drizzle-orm/pg-core';
+import { relations } from 'drizzle-orm';
 
 import { $User } from './users.schema';
+import { $OrderProduct } from './order-product.schema';
 
 export const $Order = pgTable('orders', {
   id: serial('id').primaryKey(),
@@ -19,3 +21,8 @@ export const $Order = pgTable('orders', {
     .notNull()
     .defaultNow(),
 });
+
+export const orderRelations = relations($Order, ({ one, many }) => ({
+  user: one($User, { fields: [$Order.userId], references: [$User.id] }),
+  orderProduct: many($OrderProduct),
+}));

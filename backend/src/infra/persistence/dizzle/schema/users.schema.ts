@@ -1,4 +1,7 @@
 import { pgTable, serial, timestamp, varchar } from 'drizzle-orm/pg-core';
+import { relations } from 'drizzle-orm';
+
+import { $Order } from './orders.schema';
 
 export const $User = pgTable('users', {
   id: serial('id').primaryKey(),
@@ -14,3 +17,7 @@ export const $User = pgTable('users', {
     .defaultNow(),
   lastSignInAt: timestamp('last_sign_in_at', { withTimezone: true }),
 });
+
+export const usersRelations = relations($User, ({ many }) => ({
+  orders: many($Order),
+}));

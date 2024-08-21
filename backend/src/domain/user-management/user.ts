@@ -1,4 +1,5 @@
 import { Entity } from '../../core/entity/entity';
+import { Order } from '../product-in-house/order';
 
 export interface UserProps {
   id?: number;
@@ -9,6 +10,8 @@ export interface UserProps {
   createdAt: Date;
   updatedAt: Date;
   lastSignInAt?: Date;
+
+  orders: Order[];
 }
 
 export class User extends Entity<UserProps> {
@@ -50,6 +53,10 @@ export class User extends Entity<UserProps> {
 
   get name(): string {
     return this.props.firstName + this.props.lastName;
+  }
+
+  get orders(): Order[] {
+    return this.props.orders;
   }
 
   checkPassword(password: string): boolean {

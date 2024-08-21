@@ -1,4 +1,5 @@
 import { pgTable, integer, serial, timestamp } from 'drizzle-orm/pg-core';
+import { relations } from 'drizzle-orm';
 
 import { $Order } from './orders.schema';
 import { $Product } from './product.schema';
@@ -15,3 +16,14 @@ export const $OrderProduct = pgTable('order_product', {
     .notNull()
     .defaultNow(),
 });
+
+export const orderRelations = relations($OrderProduct, ({ one }) => ({
+  order: one($Order, {
+    fields: [$OrderProduct.orderId],
+    references: [$Order.id],
+  }),
+  product: one($Product, {
+    fields: [$OrderProduct.productId],
+    references: [$Product.id],
+  }),
+}));

@@ -1,12 +1,14 @@
 import { Entity } from '../../core/entity/entity';
+import { User } from '../user-management/user';
 
 import { OrderProduct } from './order-product';
 
 export interface OrderProps {
   id?: number;
   status?: string;
-  userId: number;
-  orderProduct?: OrderProduct[];
+  userId?: number;
+  user?: User;
+  orderProducts?: OrderProduct[];
 }
 
 export class Order extends Entity<OrderProps> {
@@ -26,8 +28,12 @@ export class Order extends Entity<OrderProps> {
     return this.props.userId;
   }
 
-  get orderProduct(): OrderProduct[] {
-    return this.props.orderProduct;
+  get orderProducts(): OrderProduct[] {
+    return this.props.orderProducts;
+  }
+
+  get user(): User {
+    return this.props.user;
   }
 
   get currentState(): OrderProps {
