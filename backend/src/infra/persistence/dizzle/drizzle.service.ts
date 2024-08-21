@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Pool, PoolClient } from 'pg';
 
-import * as schema from './schema';
+import { schema } from './schema';
 import { drizzle, NodePgDatabase } from 'drizzle-orm/node-postgres';
 import { migrate } from 'drizzle-orm/node-postgres/migrator';
 import appConfig from '@core/config/app-config';

@@ -41,7 +41,7 @@ export class CreateOrderUseCase {
     const order = new Order({
       userId: user.id,
       status: 'open',
-      orderProduct: newOrderProduct,
+      orderProducts: newOrderProduct,
     });
 
     const newOrder = await this.orderRepository.create(order);
